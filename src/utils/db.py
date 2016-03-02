@@ -10,5 +10,5 @@ class DB:
 
     def add_song(self, song):
         key = {'_id': song['_id']}
-        self.__col_songs.update(key, song)
+        self.__col_songs.update(key, song, upsert=True)
         pass

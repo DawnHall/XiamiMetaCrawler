@@ -102,7 +102,10 @@ def format_song(song):
         'area': 'area'
     }
     for k, v in tmp.iteritems():
-        tmp[k] = song[v]
+        if v in song:
+            tmp[k] = song[v]
+        else:
+            tmp[k] = None
     return tmp
 
 
