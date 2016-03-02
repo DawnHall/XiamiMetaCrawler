@@ -1,6 +1,6 @@
 __author__ = 'xlrtx'
 import top.api.rest as rest
-
+from top.api.base import TopException
 API_PAGE = 1
 API_LIMIT = 100
 API_TIME_OUT = None
@@ -24,17 +24,30 @@ def page_wrapper(warp_type):
         def wrapper(*args, **kwargs):
             next_page = 1
             max_page = 2
-            all_albums = []
+            all_set = []
             result = None
             while next_page != max_page:
-                if next_page == 2:
-                    break
                 kwargs['page'] = next_page
-                result = config_func(*args, **kwargs)
-                all_albums += result[warp_type]
+                #   When fetching comments:
+                #   Max page is 20 instead of indicated by 'page_number'
+                #   An exception will occur when page > 20
+                try:
+                    result = config_func(*args, **kwargs)
+                except TopException, e:
+                    if e.errorcode == 15:
+                        break
+                sub_set = result[warp_type]
+                #   When fetching comments:
+                #   At page 1, most comment_list has a child 'commentlist' that contains the target array
+                #   At any pages other than 1, all comment_list has a child 'commentlist'
+                #   At page 1, some comment_list don't have a child array
+                if warp_type == 'comment_list':
+                    if 'commentlist' in sub_set:
+                        sub_set = result[warp_type]['commentlist']     # Not documented
+                all_set += sub_set
                 next_page = result['next']
                 max_page = result['page_number']
-            result[warp_type] = all_albums
+            result[warp_type] = all_set
             return result
 
         return wrapper

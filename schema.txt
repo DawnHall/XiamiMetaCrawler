@@ -24,7 +24,7 @@ ad  rs  (album.detail   rank.songs[src])
 1   1   lyric_text
 1   1   singers
 1   1   length
-1   1   play_count
+1   1   play_count      --> play_counts
 1   1   recommend_count --> recommends
 0   0   tags            ==> tags()
 0   0   tags_count      ==> tags()

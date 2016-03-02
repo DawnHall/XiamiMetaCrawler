@@ -3,6 +3,7 @@
 bin/
 include/
 lib/
+db/
 *.pyc
 .Python
 pip-selfcheck.json

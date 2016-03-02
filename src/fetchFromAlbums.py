@@ -30,6 +30,9 @@ songs = pool.map(func.song_get_tags, songs)
 print '..fetching comments for songs', len(songs)
 songs = pool.map(func.song_get_comments, songs)
 
+print '..write db'
+pool.map(func.put_song_to_db, songs)
+
 print '..done, cost', time.time() - tic, 's'
 pool.close()
 pool.join()
