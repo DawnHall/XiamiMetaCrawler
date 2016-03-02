@@ -29,8 +29,8 @@ def page_wrapper(warp_type):
             while next_page != max_page:
                 kwargs['page'] = next_page
                 #   When fetching comments:
-                #   Max page is 20 instead of indicated by 'page_number'
-                #   An exception will occur when page > 20
+                #   Max page is 20 instead of 'page_number'
+                #   An exception will rise while page > 20
                 try:
                     result = config_func(*args, **kwargs)
                 except TopException, e:
