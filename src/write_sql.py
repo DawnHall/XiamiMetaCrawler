@@ -1,6 +1,7 @@
 from utils.db import DB
 import pymysql
 import config
+
 __author__ = 'xlrtx'
 
 
@@ -21,7 +22,7 @@ def gen_sql_statement(song):
         val_str += ', '
     key_str = key_str.strip(', ')
     val_str = val_str.strip(', ')
-    return 'INSERT INTO xiami_music (' + key_str + ') VALUES (' + val_str + ')'
+    return 'INSERT IGNORE INTO xiami_music (' + key_str + ') VALUES (' + val_str + ')'
 
 
 def write_song_to_sql(cur, in_song):
@@ -31,17 +32,25 @@ def write_song_to_sql(cur, in_song):
     return False
 
 
+print '---------------------------------------'
+print 'Transferring mongo to mysql'
+print '---------------------------------------'
 sql_conn = pymysql.connect(**config.mysql)
 sql_cur = sql_conn.cursor()
 mongo_db = DB('xiami')
 
+print '..flushing mongo collection to mysql'
 songs = mongo_db.get_songs()
-checks = []  # Check if ths song has been imported to sql
 for song in songs:
-    check = {'saved': False, 'song': song}
-    if write_song_to_sql(sql_cur, song):
-        check['saved'] = True
-    checks += check
-    break
+    write_song_to_sql(sql_cur, song)
 
-sql_conn.close()
+try:
+    sql_conn.commit()
+    print '..commit success, dropping mongo collection'
+    print mongo_db.drop_col_songs()
+    sql_conn.close()
+except Exception, e:
+    print e.message
+    print '..commit failed, rolling back, nothing\'s changed'
+    sql_conn.rollback()
+    sql_conn.close()
