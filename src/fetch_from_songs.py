@@ -8,7 +8,7 @@ pool = ThreadPool(16)  # If param not given, should be size of CPUs
 
 
 print '---------------------------------------'
-print 'Fetching new songs, cost is about 1s per song'
+print 'Fetching new songs'
 print '---------------------------------------'
 tic = time.time()
 

@@ -13,7 +13,7 @@ def gen_sql_statement(song):
         key_str += k + ', '
         if v:
             if isinstance(v, basestring):
-                val_str += '\'' + v + '\''
+                val_str += '\'' + pymysql.escape_string(v) + '\''
             else:
                 val_str += str(v)
         else:
