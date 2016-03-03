@@ -1,5 +1,5 @@
-__author__ = 'xlrtx'
 from pymongo import MongoClient
+__author__ = 'xlrtx'
 
 
 class DB:
@@ -14,3 +14,9 @@ class DB:
 
     def drop_col_songs(self):
         self.__db.drop_collection('new_songs')
+
+    def get_songs(self):
+        return self.__col_songs.find()
+
+    def del_song(self, song_id):
+        return self.__col_songs.delete_one({'_id': song_id})

@@ -47,3 +47,4 @@ cs      (comment.song)
 1       comments        --> comment_list[].message
 
 
+INSERT INTO xiami_music (lyric_text, _id, language, album_id, tags_count, song_name, area, recommend_count, artist_name, play_count, publish_ts, length, lyric, comments, singers, artist_id, album_name, tags) VALUES (NULL, 1775573880, '日语', 2100269360, NULL, 'ダイアローグ・モノローグ (Live at 三内丸山遺跡)', 'Japan 日本', NULL, '秦 基博', 677, 1456243200, 287, NULL, '留爪儿', '秦 基博', 54185, 'スミレ', NULL)
