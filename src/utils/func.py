@@ -37,12 +37,12 @@ def reduce_albums_detail_to_songs(pre, cur):
 def song_get_tags(song):
     in_tags = api.get_tag_tags(song['song_id'], 'song')['tags']
     tags = []
-    tags_count = []
+    tag_counts = []
     for in_tag in in_tags:
         tags += [trim(in_tag['tag'])]
-        tags_count += [str(in_tag['count'])]
+        tag_counts += [str(in_tag['count'])]
     song['tags'] = '|'.join(tags)
-    song['tags_count'] = '|'.join(tags_count)
+    song['tag_counts'] = '|'.join(tag_counts)
     return song
 
 
@@ -95,7 +95,7 @@ def format_song(song):
         'play_count': 'play_counts',
         'recommend_count': 'recommends',
         'tags': 'tags',
-        'tags_count': 'tags_count',
+        'tag_counts': 'tag_counts',
         'comments': 'comments',
         'publish_ts': 'publish_ts',
         'language': 'language',

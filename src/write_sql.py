@@ -34,7 +34,6 @@ def write_song_to_sql(cur, in_song):
 
 sql_conn = pymysql.connect(**config.mysql)
 sql_cur = sql_conn.cursor()
-sql_cur = None
 mongo_db = DB('xiami')
 
 songs = mongo_db.get_songs()
