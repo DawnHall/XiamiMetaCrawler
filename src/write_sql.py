@@ -11,7 +11,7 @@ def gen_sql_statement(song):
         if k == '_id':
             k = 'song_id'
         key_str += k + ', '
-        if v:
+        if v is not None:
             if isinstance(v, basestring):
                 val_str += '\'' + pymysql.escape_string(v) + '\''
             else:
@@ -27,8 +27,7 @@ def gen_sql_statement(song):
 def write_song_to_sql(cur, in_song):
     statement = gen_sql_statement(in_song)
     cur.execute(statement)
-    data = cur.fetchone()
-    print data
+    print cur.description
     return False
 
 
