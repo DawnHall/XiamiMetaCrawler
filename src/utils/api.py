@@ -1,6 +1,6 @@
-__author__ = 'xlrtx'
 import top.api.rest as rest
 from top.api.base import TopException
+__author__ = 'xlrtx'
 API_PAGE = 1
 API_LIMIT = 100
 API_TIME_OUT = None

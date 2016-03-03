@@ -1,7 +1,7 @@
 #   TODO maybe implement memory cache?
-__author__ = 'xlrtx'
 import utils.api as api
 from utils.db import DB
+__author__ = 'xlrtx'
 
 db = DB('xiami')
 

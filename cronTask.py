@@ -1,5 +1,5 @@
-__author__ = 'xlrtx'
 import subprocess
+__author__ = 'xlrtx'
 
 
 def call_script(path_bin, path_script):

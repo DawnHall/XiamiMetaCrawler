@@ -1,7 +1,7 @@
-__author__ = 'xlrtx'
 from multiprocessing.dummy import Pool as ThreadPool
 import time
 import utils.func as func
+__author__ = 'xlrtx'
 
 
 pool = ThreadPool(16)  # If param not given, should be size of CPUs
