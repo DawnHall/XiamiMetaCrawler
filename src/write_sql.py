@@ -28,7 +28,6 @@ def gen_sql_statement(song):
 def write_song_to_sql(cur, in_song):
     statement = gen_sql_statement(in_song)
     cur.execute(statement)
-    print cur.description
     return False
 
 
@@ -47,7 +46,6 @@ for song in songs:
 try:
     sql_conn.commit()
     print '..commit success, dropping mongo collection'
-    print mongo_db.drop_col_songs()
     sql_conn.close()
 except Exception, e:
     print e.message
